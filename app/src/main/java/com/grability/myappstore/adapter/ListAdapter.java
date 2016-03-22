@@ -7,6 +7,8 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,9 @@ import com.grability.myappstore.model.ItemObject;
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter {
+
+    // Animation
+    Animation animFadein;
 
     private LayoutInflater layoutinflater;
     private List<ItemObject> listStorage;
@@ -56,6 +61,12 @@ public class ListAdapter extends BaseAdapter {
             listViewHolder.screenShot = (ImageView)convertView.findViewById(R.id.screen_shot);
             listViewHolder.musicName = (TextView)convertView.findViewById(R.id.music_name);
             listViewHolder.musicAuthor = (TextView)convertView.findViewById(R.id.music_author);
+
+            // load the animation
+            animFadein = AnimationUtils.loadAnimation(context,
+                    R.anim.slide_down);
+            // start the animation
+            listViewHolder.card_view.startAnimation(animFadein);
 
             convertView.setTag(listViewHolder);
         }else{
