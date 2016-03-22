@@ -1,5 +1,6 @@
 package com.grability.myappstore.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.grability.myappstore.DetailActivity;
+import com.grability.myappstore.DetalleActivity;
 import com.grability.myappstore.R;
 import com.grability.myappstore.adapter.CustomAdapter;
 import com.grability.myappstore.model.ItemObject;
@@ -40,6 +44,8 @@ public class AplicacionesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), DetailActivity.class);
+                getActivity().startActivity(i);
             }
         });
 

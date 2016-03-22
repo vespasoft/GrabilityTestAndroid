@@ -9,4 +9,5 @@
     <string name="title_section4">Social Networking</string>
     <string name="title_section5">Photo &amp; Video</string>
     <string name="title_section6">Music</string>
+    <string name="title_activity_splash">Splash</string>
 </resources>

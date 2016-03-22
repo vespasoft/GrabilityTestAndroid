@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements CategoriasFragmen
             Intent i = new Intent(this, DetalleActivity.class);
             i.putExtra("id_category", c.getId());
             startActivity(i);
+            overridePendingTransition(R.anim.right_to_left, R.anim.right_to_left);
         }
     }
 

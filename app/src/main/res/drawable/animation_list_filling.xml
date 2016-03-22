@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite01"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite02"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite03"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite04"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite05"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite06"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite07"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite08"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite09"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite10"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite11"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite12"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite13"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite14"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite15"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite16"/>
+
+    <item
+        android:duration="100"
+        android:drawable="@drawable/sprite17"/>
+
+</animation-list>

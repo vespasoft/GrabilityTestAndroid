@@ -1,6 +1,9 @@
 package com.grability.myappstore.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.grability.myappstore.DetailActivity;
 import com.grability.myappstore.R;
 import com.grability.myappstore.model.ItemObject;
 
@@ -17,9 +21,9 @@ public class CustomAdapter extends BaseAdapter {
 
     private LayoutInflater layoutinflater;
     private List<ItemObject> listStorage;
-    private Context context;
+    private Activity context;
 
-    public CustomAdapter(Context context, List<ItemObject> customizedListView) {
+    public CustomAdapter(Activity context, List<ItemObject> customizedListView) {
         this.context = context;
         layoutinflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         listStorage = customizedListView;
@@ -47,6 +51,7 @@ public class CustomAdapter extends BaseAdapter {
         if(convertView == null){
             listViewHolder = new ViewHolder();
             convertView = layoutinflater.inflate(R.layout.row_app_item, parent, false);
+            listViewHolder.card_view = (CardView)convertView.findViewById(R.id.card_view);
             listViewHolder.screenShot = (ImageView)convertView.findViewById(R.id.screen_shot);
             listViewHolder.musicName = (TextView)convertView.findViewById(R.id.music_name);
             listViewHolder.musicAuthor = (TextView)convertView.findViewById(R.id.music_author);
@@ -58,6 +63,14 @@ public class CustomAdapter extends BaseAdapter {
         listViewHolder.screenShot.setImageResource(listStorage.get(position).getScreenShot());
         listViewHolder.musicName.setText(listStorage.get(position).getMusicName());
         listViewHolder.musicAuthor.setText(listStorage.get(position).getMusicAuthor());
+        listViewHolder.card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DetailActivity.class);
+                context.startActivity(i);
+                context.overridePendingTransition(R.anim.sequential, R.anim.sequential);
+            }
+        });
 
         return convertView;
     }
@@ -66,5 +79,7 @@ public class CustomAdapter extends BaseAdapter {
         ImageView screenShot;
         TextView musicName;
         TextView musicAuthor;
+        CardView card_view;
+
     }
 }
