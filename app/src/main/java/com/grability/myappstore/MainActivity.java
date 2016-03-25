@@ -1,6 +1,7 @@
 package com.grability.myappstore;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import com.grability.myappstore.controller.dbController;
 import com.grability.myappstore.fragments.AplicacionesFragment;
 import com.grability.myappstore.fragments.CategoriasFragment;
 import com.grability.myappstore.model.category;
+import com.grability.myappstore.util.Utils;
 
 public class MainActivity extends AppCompatActivity implements CategoriasFragment.CategoriasListener  {
 
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements CategoriasFragmen
         if (hayDetalle) {
             onCategorySelected(cont.getAllCategory().get(0));
         }
-
     }
 
     @Override

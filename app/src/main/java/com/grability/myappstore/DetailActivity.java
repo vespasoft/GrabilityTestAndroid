@@ -2,6 +2,7 @@ package com.grability.myappstore;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -111,11 +112,11 @@ public class DetailActivity extends AppCompatActivity {
         btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (datos!=null) {
-                    if ( Utils.isConnectingToInternet(DetailActivity.this)) {
+                if (datos != null) {
+                    if (Utils.isConnectingToInternet(DetailActivity.this)) {
                         Utils.launchExplorerURL(DetailActivity.this, datos.getLinl_href());
                     } else {
-                        Utils.DisplaySnackbarMessage(v, getString(R.string.error_mensaje_internet), "L" );
+                        Utils.DisplaySnackbarMessage(v, getString(R.string.error_mensaje_internet), "L");
                     }
                 }
             }
@@ -133,6 +134,7 @@ public class DetailActivity extends AppCompatActivity {
         cardProfile.startAnimation(animRighttoleft); // start the animation
         cardDescription.startAnimation(animLefttoright); // start the animation
         cardSummary.startAnimation(animSlidedown); // start the animation
+
     }
 
     @Override
