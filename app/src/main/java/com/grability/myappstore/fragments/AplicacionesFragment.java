@@ -11,10 +11,12 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.grability.myappstore.DetailActivity;
-import com.grability.myappstore.DetalleActivity;
 import com.grability.myappstore.R;
 import com.grability.myappstore.adapter.CustomAdapter;
-import com.grability.myappstore.model.ItemObject;
+import com.grability.myappstore.app.AppConfig;
+import com.grability.myappstore.controller.dbController;
+import com.grability.myappstore.model.category;
+import com.grability.myappstore.model.entry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,23 +25,50 @@ public class AplicacionesFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "categoryid";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String categoryid;
+    private dbController cont;
+    private List<entry> allItems;
+    private GridView gridview;
+    private CustomAdapter customAdapter;
+
+    // TODO: Rename and change types and number of parameters
+    public static AplicacionesFragment newInstance(String param1) {
+        AplicacionesFragment fragment = new AplicacionesFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public AplicacionesFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            categoryid = getArguments().getString(ARG_PARAM1);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_grid, container, false);
-        GridView gridview = (GridView)view.findViewById(R.id.grid);
 
-        List<ItemObject> allItems = getAllItemObject();
-        CustomAdapter customAdapter = new CustomAdapter(getActivity(), allItems);
+        gridview = (GridView)view.findViewById(R.id.grid);
+
+        cont = new dbController(getActivity());
+
+        allItems = cont.getAllEntry(1, cont.getAllCategory().get(0).getId());
+
+        customAdapter = new CustomAdapter(getActivity(), allItems);
         gridview.setAdapter(customAdapter);
-
+        gridview.requestLayout();
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -52,26 +81,12 @@ public class AplicacionesFragment extends Fragment {
         return view;
     }
 
-    public void filtrarCategoria(int id) {
-        Toast.makeText(getActivity(), "En Fragment Categoria seleccionada "+id, Toast.LENGTH_LONG).show();
+    public void filtrarCategoria(category id) {
+        // Toast.makeText(getActivity(), "En Fragment Categoria seleccionada "+id, Toast.LENGTH_LONG).show();
+        allItems = cont.getAllEntry(1, id.getId());
+        customAdapter = new CustomAdapter(getActivity(), allItems);
+        gridview.setAdapter(customAdapter);
+        gridview.requestLayout();
     }
-
-    private List<ItemObject> getAllItemObject(){
-        List<ItemObject> items = new ArrayList<>();
-        items.add(new ItemObject(R.mipmap.app001,"Dip It Low", "Christina Milian"));
-        items.add(new ItemObject(R.mipmap.app002,"Someone like you", "Adele Adkins"));
-        items.add(new ItemObject(R.mipmap.app003,"Ride", "Ciara"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Paparazzi", "Lady Gaga"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Forever", "Chris Brown"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Stay", "Rihanna"));
-        items.add(new ItemObject(R.mipmap.app001,"Marry me", "Jason Derulo"));
-        items.add(new ItemObject(R.mipmap.app002,"Waka Waka", "Shakira"));
-        items.add(new ItemObject(R.mipmap.app003,"Dark Horse", "Katy Perry"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Dip It Low", "Christina Milian"));
-        items.add(new ItemObject(R.mipmap.ic_launcher, "Dip It Low", "Christina Milian"));
-        items.add(new ItemObject(R.mipmap.ic_launcher, "Dip It Low", "Christina Milian"));
-        return items;
-    }
-
 
 }

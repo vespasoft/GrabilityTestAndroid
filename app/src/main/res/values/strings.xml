@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">AppStore</string>
+    <string name="app_name">Top 20 Free Apps</string>
     <string name="hello_world">Hello world!</string>
+    <string name="label_free">GRATIS</string>
     <string name="action_settings">Settings</string>
+    <string name="error_offline_conexion">Modo de Conexion OFFLINE</string>
+    <string name="error_title_internet">Error de Conexion</string>
+    <string name="error_mensaje_internet">Asegurese de que su dispositivo tenga conexión a Internet o a una red WIFI.</string>
 
     <string name="title_section1">Books</string>
     <string name="title_section2">Games</string>
@@ -10,4 +14,7 @@
     <string name="title_section5">Photo &amp; Video</string>
     <string name="title_section6">Music</string>
     <string name="title_activity_splash">Splash</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,23 +1,18 @@
 package com.grability.myappstore.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.grability.myappstore.DetailActivity;
-import com.grability.myappstore.DetalleActivity;
 import com.grability.myappstore.R;
 import com.grability.myappstore.adapter.ListAdapter;
-import com.grability.myappstore.model.ItemObject;
+import com.grability.myappstore.app.AppConfig;
+import com.grability.myappstore.controller.dbController;
+import com.grability.myappstore.model.entry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,45 +21,56 @@ public class AplicacionesListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "categoryid";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String categoryid;
+    private ListView listview;
+    private List<entry> allItems;
+    private ListAdapter listAdapter;
 
+    // TODO: Rename and change types and number of parameters
+    public static AplicacionesListFragment newInstance(String param1) {
+        AplicacionesListFragment fragment = new AplicacionesListFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public AplicacionesListFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            categoryid = getArguments().getString(ARG_PARAM1);
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-        ListView listview = (ListView)view.findViewById(R.id.list);
 
-        List<ItemObject> allItems = getAllItemObject();
-        ListAdapter listAdapter = new ListAdapter(getActivity(), allItems);
+        listview = (ListView)view.findViewById(R.id.list);
+        dbController cont = new dbController(getActivity());
+        allItems = cont.getAllEntry(1, categoryid);
+
+        listAdapter = new ListAdapter(getActivity(), allItems);
         listview.setAdapter(listAdapter);
 
         return view;
     }
 
-    public void filtratCategoria(int id) {
+    public void filtratCategoria(String id) {
         Toast.makeText(getActivity(), "Categoria seleccionada "+id, Toast.LENGTH_LONG).show();
-    }
+        dbController cont = new dbController(getActivity());
 
-    private List<ItemObject> getAllItemObject(){
-        List<ItemObject> items = new ArrayList<>();
-        items.add(new ItemObject(R.mipmap.app001,"Dip It Low", "Christina Milian"));
-        items.add(new ItemObject(R.mipmap.app002,"Someone like you", "Adele Adkins"));
-        items.add(new ItemObject(R.mipmap.app003,"Ride", "Ciara"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Paparazzi", "Lady Gaga"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Forever", "Chris Brown"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Stay", "Rihanna"));
-        items.add(new ItemObject(R.mipmap.app001,"Marry me", "Jason Derulo"));
-        items.add(new ItemObject(R.mipmap.app002,"Waka Waka", "Shakira"));
-        items.add(new ItemObject(R.mipmap.app003,"Dark Horse", "Katy Perry"));
-        items.add(new ItemObject(R.mipmap.ic_launcher,"Dip It Low", "Christina Milian"));
-        items.add(new ItemObject(R.mipmap.ic_launcher, "Dip It Low", "Christina Milian"));
-        items.add(new ItemObject(R.mipmap.ic_launcher, "Dip It Low", "Christina Milian"));
-        return items;
+        allItems = cont.getAllEntry(1, id);
+        listAdapter = new ListAdapter(getActivity(), allItems);
+        listview.setAdapter(listAdapter);
     }
 
 

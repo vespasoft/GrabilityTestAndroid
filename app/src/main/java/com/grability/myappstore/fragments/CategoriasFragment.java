@@ -12,16 +12,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.grability.myappstore.R;
-import com.grability.myappstore.model.ItemCategory;
+import com.grability.myappstore.controller.dbController;
+import com.grability.myappstore.model.category;
+
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class CategoriasFragment extends Fragment {
 
-    private ItemCategory[] datos =
-            new ItemCategory[]{
-                    new ItemCategory(4001, "Categoria 1", "http:/", "Categoria 1"), new ItemCategory(4002, "Categoria 2", "http:/", "Categoria 2"), new ItemCategory(4003, "Categoria 3", "http:/", "Categoria 3"), new ItemCategory(4004, "Categoria 4", "http:/", "Categoria 4"), new ItemCategory(4005, "Categoria 5", "http:/", "Categoria 5")};
+    private List<category> datos;
     private ListView lstListado;
 
     private CategoriasListener listener;
@@ -32,6 +33,11 @@ public class CategoriasFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
+        dbController cont = new dbController(getActivity());
+        datos = cont.getAllCategory();
+        cont.getCountEntry();
+
         lstListado = (ListView)getView().findViewById(R.id.LstCategorias);
         lstListado.setAdapter(new AdaptadorCategory(this));
         lstListado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -39,10 +45,11 @@ public class CategoriasFragment extends Fragment {
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 if (listener != null) {
                     listener.onCategorySelected(
-                            (ItemCategory) lstListado.getAdapter().getItem(pos));
+                            (category) lstListado.getAdapter().getItem(pos));
                 }
             }
         });
+        lstListado.setSelection(0);
     }
 
     @Override
@@ -52,14 +59,14 @@ public class CategoriasFragment extends Fragment {
     }
 
     public interface CategoriasListener {
-        void onCategorySelected(ItemCategory c);
+        void onCategorySelected(category c);
     }
 
     public void setCategoriasListener(CategoriasListener listener) {
         this.listener=listener;
     }
 
-    class AdaptadorCategory extends ArrayAdapter<ItemCategory> { Activity context;
+    class AdaptadorCategory extends ArrayAdapter<category> { Activity context;
         AdaptadorCategory(Fragment context) {
             super(context.getActivity(), R.layout.listitem_category, datos);
             this.context = context.getActivity();
@@ -69,7 +76,7 @@ public class CategoriasFragment extends Fragment {
             LayoutInflater inflater = context.getLayoutInflater();
             View item = inflater.inflate(R.layout.listitem_category, null);
             TextView label = (TextView)item.findViewById(R.id.label);
-            label.setText(datos[position].getLabel());
+            label.setText(datos.get(position).getLabel());
 
             return(item);
         }

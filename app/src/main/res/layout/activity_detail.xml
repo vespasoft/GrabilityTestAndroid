@@ -17,43 +17,158 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="24dp">
+            android:paddingTop="10dp">
 
             <!-- Card Perfil -->
             <android.support.v7.widget.CardView
+                android:id="@+id/cardProfile"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="5dp">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <RelativeLayout
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/picture"
+                        android:layout_width="@dimen/image_profile_width"
+                        android:layout_height="@dimen/image_profile_height"
+                        android:scaleType="centerCrop"
+                        android:layout_margin="3dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
+                    </com.android.volley.toolbox.NetworkImageView>
                     <!--Etiqueta Perfil -->
                     <TextView
+                        android:id="@+id/txtName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Perfil"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:text="NCAA March Madness Live"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/picture"
+                        android:layout_toEndOf="@+id/picture" />
                     <!--Texto de ejemplo-->
                     <TextView
+                        android:id="@+id/txtArtist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Texto de ejemplo" />
+                        android:text="NCAA Digital"
+                        android:layout_marginLeft="5dp"
+                        android:layout_below="@+id/txtName"
+                        android:layout_toRightOf="@+id/picture"
+                        android:layout_toEndOf="@+id/picture" />
 
-                </LinearLayout>
+                    <Button
+                        android:id="@+id/btnDownload"
+                        android:text="Download"
+                        android:textColor="@color/blanco"
+                        android:background="@drawable/button_enter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtArtist"
+                        android:layout_toRightOf="@+id/picture"
+                        android:layout_toEndOf="@+id/picture" />
+
+                </RelativeLayout>
 
             </android.support.v7.widget.CardView>
 
-            <!-- Card Amigos -->
+            <!-- Card Description -->
+
             <android.support.v7.widget.CardView
+                android:id="@+id/cardDescription"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp">
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Etiqueta Intereses -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:id="@+id/textView" />
+
+                    <!-- Texto de ejemplo -->
+                    <TextView
+                        android:id="@+id/txtPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Price: 0.00 USD"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/textView"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:id="@+id/txtType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Content Type: Application"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/txtPrice"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:id="@+id/txtCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category: Sports"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/txtType"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:id="@+id/txtId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Id: 423246594"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/txtCategory"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:id="@+id/txtBundleid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bundle Id: com.turner.mmod2011temp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/txtId"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:id="@+id/txtReleaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="March 9, 2011"
+                        android:layout_below="@+id/textView"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <!-- Card Summary -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
 
                 <LinearLayout
+                    android:layout_margin="10dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -62,43 +177,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Amigos(450)"
+                        android:text="Summary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
                     <!-- Texto de ejemplo -->
                     <TextView
+                        android:id="@+id/txtSummary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Texto de ejemplo" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <!-- Card Intereses -->
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <!-- Etiqueta Intereses -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Intereses"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                    <!-- Texto de ejemplo -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Texto de ejemplo" />
+                        android:text="Watch every game live and make your picks for the 2016 NCAA® Division I Men's Basketball Tournament. With the 2016 NCAA March Madness Live app for iPhone, iPad, iPod touch, Apple TV, and Apple Watch, you and your friends can have the ultimate March Madness fan experience anytime, anywhere – the ONLY app where you can make picks AND watch live games. No more missed buzzer beaters and switching between apps to watch and track your picks!\n\nWATCH, LISTEN, and CAST\n• Log in with your TV provider to enjoy unlimited access to live streaming video of all 67 games across TBS, CBS, TNT and truTV. (Paid TV subscription required for games broadcast on TBS, TNT and truTV; a temporary, 3 hour live video pass is available prior to logging in; CBS games do not require a paid TV subscription.)\n• NEW for 2016: AirPlay and Google Cast support. Cast live games and video on demand to your TV using AirPlay and Google Cast! (TV provider log in is required to cast LIVE games on TBS, TNT, and TruTV. Log in is not required to cast video on demand and live games on CBS.)\n• NEW for 2016 for iPad: Enjoy a redesigned, immersive live video experience with larger video (optimized to fit your screen) alongside a new game timeline with up-to-the minute play-by-play stats and curated highlights from Twitter and Instagram.\n• Listen to a live radio broadcast from every game of the tournament.\n• Watch exclusive March Madness video on demand, including classic games, in-depth analysis, highlights, and behind the scenes features.\n• NEW for 2016: In addition to team-specific live video streams for each Final Four game, watch your favorite team's live video stream for the National Championship game on TBS. \n• Please note: Live video is only available in the US, its territories, and Bermuda. \n\nFOLLOW\n• Receive live game notifications for upsets, overtimes, close games, and your favorite teams on your mobile device AND Apple Watch.\n• Follow up-to-the-minute scores and stats, and explore the tournament with the official tournament bracket.\n• NEW for 2016: Experience the best of social media, from Twitter to Instagram, in the NEW and improved Coke Zero Social Arena. Track and share key moments including the most memorable video highlights, photos, and tweets.\n• Satisfy your team fan loyalties, learn about the Cinderellas, and research your bracket with team pages.\n\nNow available for Apple Watch:\n• Get alerts for your favorite teams so you never miss an upset or close game\n• Quick access to live scores and schedule\n\nPLAY\n• Make and track your picks right from your iPhone and iPad with the NCAA March Madness Bracket Challenge.\n- On the go? Make picks on your phone super fast in list view; or enjoy the full picking experience in bracket view. \n• COMMISSIONERS WELCOME! Easily join groups, create groups, and invite friends (or foes) to play.\n• NEW for 2016: NCAA March Madness Tournament Run – Your bracket busted? Sign up anytime for the NCAA March Madness Tournament Run-- answer consecutive questions about upcoming games to score points and go on your own tournament \'run\'!\n\n----\n\nFEEDBACK\nWe love hearing from fans. If you have suggestions on how we can improve, please get in touch!\n\nE-mail: mmlivehelp@turner.com\nTwitter: @MMLive_Help\n\nIf you're enjoying your 2016 NCAA March Madness Live experience, please let us know by rating and reviewing us in the App Store!\n\n----\n\nSUPPORT\nQuestions?\n\nE-mail: mmlivehelp@turner.com\nPhone: 855-5MM-LIVE (855-566-5483)\nTwitter: @MMLive_Help\n\n(Please remember that Twitter is a public forum and information you post there will be made public.  Do not post information to Twitter if you do not want it to be made public.)\n\n----\n\nPRIVACY\nYou may be interested in our Privacy Policy and Terms of Use, which can be found here:\nhttp://www.ncaa.com/privacy\nhttp://www.ncaa.com/tos" />
 
                 </LinearLayout>
 
@@ -110,43 +196,14 @@
 
     <!-- App Bar -->
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="wrap_content"
+        android:theme="@style/MyMaterialTheme">
 
-        <!-- Collapser -->
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapser"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <!-- Imagen del detalle -->
-            <ImageView
-                android:id="@+id/image_paralax"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
-
-            <!-- Toolbar -->
-            <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

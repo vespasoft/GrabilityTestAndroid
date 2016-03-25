@@ -12,11 +12,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.grability.myappstore.DetailActivity;
 import com.grability.myappstore.R;
-import com.grability.myappstore.model.ItemObject;
+import com.grability.myappstore.app.AppController;
+import com.grability.myappstore.controller.dbController;
+import com.grability.myappstore.model.entry;
+import com.grability.myappstore.model.image;
 
 import java.util.List;
 
@@ -25,14 +29,17 @@ public class ListAdapter extends BaseAdapter {
     // Animation
     Animation animFadein;
 
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     private LayoutInflater layoutinflater;
-    private List<ItemObject> listStorage;
+    private List<entry> listStorage;
     private Activity context;
+    private dbController cont;
 
-    public ListAdapter(Activity context, List<ItemObject> customizedListView) {
+    public ListAdapter(Activity context, List<entry> customizedListView) {
         this.context = context;
         layoutinflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         listStorage = customizedListView;
+        cont = new dbController(context);
     }
 
     @Override
@@ -58,29 +65,44 @@ public class ListAdapter extends BaseAdapter {
             listViewHolder = new ViewHolder();
             convertView = layoutinflater.inflate(R.layout.row_list_item, parent, false);
             listViewHolder.card_view = (CardView)convertView.findViewById(R.id.card_view);
-            listViewHolder.screenShot = (ImageView)convertView.findViewById(R.id.screen_shot);
-            listViewHolder.musicName = (TextView)convertView.findViewById(R.id.music_name);
-            listViewHolder.musicAuthor = (TextView)convertView.findViewById(R.id.music_author);
+            listViewHolder.profilePic = (NetworkImageView) convertView.findViewById(R.id.picture);
+            listViewHolder.txtName = (TextView)convertView.findViewById(R.id.txtName);
+            listViewHolder.txtArtist = (TextView)convertView.findViewById(R.id.txtArtist);
 
             // load the animation
-            animFadein = AnimationUtils.loadAnimation(context,
-                    R.anim.slide_down);
-            // start the animation
-            listViewHolder.card_view.startAnimation(animFadein);
+            animFadein = AnimationUtils.loadAnimation(context, R.anim.left_to_right);
+            listViewHolder.card_view.startAnimation(animFadein); // start the animation
 
             convertView.setTag(listViewHolder);
-        }else{
+        } else {
             listViewHolder = (ViewHolder)convertView.getTag();
         }
-        listViewHolder.screenShot.setImageResource(listStorage.get(position).getScreenShot());
-        listViewHolder.musicName.setText(listStorage.get(position).getMusicName());
-        listViewHolder.musicAuthor.setText(listStorage.get(position).getMusicAuthor());
+        listViewHolder.images = cont.getAllImagebyEntry(listStorage.get(position).getId());
+
+        if (imageLoader == null)
+            imageLoader = AppController.getInstance().getImageLoader();
+        //TextView txtTitle = (TextView) convertView.findViewById(R.id.textViewTitle);
+        //utils.SetTypeFaceTitle(context, GamesItems.get(position).getName(), txtTitle);
+        if (listViewHolder.images.size()>0) {
+            listViewHolder.profilePic.setImageUrl(listViewHolder.images.get(1).getLabel(),
+                    imageLoader);
+        }
+        // load the animation
+        animFadein = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        // start the animation
+        listViewHolder.profilePic.startAnimation(animFadein);
+
+        // listViewHolder.picture.setImageResource(R.mipmap.app001);
+        listViewHolder.txtName.setText(listStorage.get(position).getImname());
+        listViewHolder.txtArtist.setText(listStorage.get(position).getArtist());
+        final entry dato = listStorage.get(position);
         listViewHolder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("entry", dato);
                 context.startActivity(i);
-                context.overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                //context.overridePendingTransition(R.anim.left_to_right, R.anim.left_to_right);
             }
         });
 
@@ -88,9 +110,10 @@ public class ListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder{
-        ImageView screenShot;
-        TextView musicName;
-        TextView musicAuthor;
+        NetworkImageView profilePic;
+        TextView txtName;
+        TextView txtArtist;
         CardView card_view;
+        List<image> images;
     }
 }
